@@ -1,7 +1,7 @@
 import {
   GET_USERS,
-  GET_USERS_USER_SUCCESS,
-  GET_USERS_USER_ERROR
+  GET_USERS_LIST_SUCCESS,
+  GET_USERS_LIST_ERROR
 } from "./actions";
 
 export interface UsersListReducerState {
@@ -25,7 +25,7 @@ export function reducer(state = initialState, action: any) {
         ...state,
         loading: true
       };
-    case GET_USERS_USER_SUCCESS:
+    case GET_USERS_LIST_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -33,12 +33,11 @@ export function reducer(state = initialState, action: any) {
         since: 0,
         error: false
       };
-    case GET_USERS_USER_ERROR:
+    case GET_USERS_LIST_ERROR:
       return {
         ...state,
         loading: false,
-        error: true,
-        user: action.payload
+        error: true
       };
     default:
       return state;

@@ -15,7 +15,6 @@ export function getSingleUser(userId: string) {
     return http
       .get(`/users/${userId}`)
       .then(({ data }) => {
-        console.log(data);
         return dispatch({
           type: GET_SINGLE_USER_SUCCESS,
           payload: data
@@ -24,7 +23,7 @@ export function getSingleUser(userId: string) {
       .catch(error => {
         return dispatch({
           type: GET_SINGLE_USER_ERROR,
-          payload: error
+          payload: error.message
         });
       });
   };

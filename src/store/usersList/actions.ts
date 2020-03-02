@@ -2,8 +2,8 @@ import { createHttpClient } from "../createHttpClient";
 import { Dispatch } from "redux";
 
 export const GET_USERS = "GET_USERS";
-export const GET_USERS_USER_SUCCESS = "GET_USERS_USER_SUCCESS";
-export const GET_USERS_USER_ERROR = "GET_USERS_USER_ERROR";
+export const GET_USERS_LIST_SUCCESS = "GET_USERS_LIST_SUCCESS";
+export const GET_USERS_LIST_ERROR = "GET_USERS_LIST_ERROR";
 
 export function getUsers() {
   return (dispatch: Dispatch, getState: Function): any => {
@@ -18,13 +18,13 @@ export function getUsers() {
       .get(`/users?since=${since}`)
       .then(({ data }) => {
         return dispatch({
-          type: GET_USERS_USER_SUCCESS,
+          type: GET_USERS_LIST_SUCCESS,
           payload: data
         });
       })
       .catch(error => {
         return dispatch({
-          type: GET_USERS_USER_ERROR,
+          type: GET_USERS_LIST_ERROR,
           payload: error
         });
       });

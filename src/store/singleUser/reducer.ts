@@ -8,13 +8,13 @@ import {
 export interface SingleUserReducerState {
   loading: boolean;
   user: any;
-  error: false;
+  error: string | null;
 }
 
 export const initialState: SingleUserReducerState = {
   loading: true,
   user: null,
-  error: false
+  error: null
 };
 
 export function reducer(state = initialState, action: any) {
@@ -28,14 +28,14 @@ export function reducer(state = initialState, action: any) {
       return {
         ...state,
         loading: false,
-        error: false,
+        error: null,
         user: action.payload
       };
     case GET_SINGLE_USER_ERROR:
       return {
         ...state,
         loading: false,
-        error: true
+        error: action.payload
       };
     case CLEAR_SINGLE_USER:
       return {

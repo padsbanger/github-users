@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
+import { withStyles } from "@material-ui/styles";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -14,8 +15,18 @@ interface UserProps {
   clearSingleUser: () => void;
   user: any;
   loading: boolean;
-  error: boolean;
+  error: string | null;
+  classes: any;
 }
+
+const useStyles = {
+  root: {
+    maxWidth: 345
+  },
+  media: {
+    height: 140
+  }
+};
 
 class User extends React.Component<UserProps> {
   componentDidMount() {
@@ -27,19 +38,24 @@ class User extends React.Component<UserProps> {
   }
 
   render() {
-    const { loading, user, error } = this.props;
+    const { loading, user, error, classes } = this.props;
     if (loading) {
       return <div>loading</div>;
     }
 
     if (user) {
       return (
-        <Card>
+        <Card className={classes.root}>
           <CardActionArea>
-            <CardMedia image={user.avatar_url} title="Contemplative Reptile" />
+            <CardMedia
+              className={classes.media}
+              image={user.avatar_url}
+              title="Contemplative Reptile"
+            />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-                {user.name} {user.location ? `- ${user.location}` : ""}
+                {user.name || user.login}{" "}
+                {user.location ? `- ${user.location}` : ""}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 Followers: {user.followers} Following: {user.following}
@@ -53,7 +69,7 @@ class User extends React.Component<UserProps> {
       );
     }
     if (error) {
-      return <div>There was an error</div>;
+      return <div>{error}</div>;
     }
   }
 }
@@ -69,4 +85,7 @@ const mapDispatchToProps = {
   clearSingleUser
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(User);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(useStyles)(User));
