@@ -7,6 +7,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { State } from "../store/combineReducers";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { getSingleUser, clearSingleUser } from "../store/singleUser/actions";
 
 interface UserProps {
@@ -21,10 +22,11 @@ interface UserProps {
 
 const useStyles = {
   root: {
-    maxWidth: 345
+    maxWidth: 345,
+    margin: "10px auto"
   },
   media: {
-    height: 140
+    height: 340
   }
 };
 
@@ -40,7 +42,7 @@ class User extends React.Component<UserProps> {
   render() {
     const { loading, user, error, classes } = this.props;
     if (loading) {
-      return <div>loading</div>;
+      return <CircularProgress />;
     }
 
     if (user) {

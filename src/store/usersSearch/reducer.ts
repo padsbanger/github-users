@@ -1,40 +1,41 @@
 import {
-  GET_SINGLE_USER,
-  GET_SINGLE_USER_SUCCESS,
-  GET_SINGLE_USER_ERROR
-} from "../singleUser/actions";
+  SEARCH_USERS,
+  SEARCH_USERS_SUCCESS,
+  SEARCH_USERS_ERROR
+} from "../usersSearch/actions";
 
-export interface SingleUserReducerState {
+export interface UserSearchReducerState {
+  search: string;
   loading: boolean;
-  singleUser: {};
-  error: false;
+  searchResults: [];
 }
 
-export const initialState: SingleUserReducerState = {
+export const initialState: UserSearchReducerState = {
+  search: "",
   loading: false,
-  singleUser: {},
-  error: false
+  searchResults: []
 };
 
 export function reducer(state = initialState, action: any) {
   switch (action.type) {
-    case GET_SINGLE_USER:
+    case SEARCH_USERS:
       return {
         ...state,
-        loading: true
+        loading: true,
+        search: action.payload
       };
-    case GET_SINGLE_USER_SUCCESS:
+    case SEARCH_USERS_SUCCESS:
       return {
         ...state,
         loading: false,
-        error: false
+        error: false,
+        searchResults: action.payload.items
       };
-    case GET_SINGLE_USER_ERROR:
+    case SEARCH_USERS_ERROR:
       return {
         ...state,
         loading: false,
-        error: true,
-        user: action.payload
+        error: true
       };
     default:
       return state;

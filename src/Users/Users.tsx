@@ -6,13 +6,8 @@ import throttle from "lodash.throttle";
 import { withStyles } from "@material-ui/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
+import UserListItem from "../components/UserListItem";
+import { ListItem } from "@material-ui/core";
 
 interface UsersProps {
   users: any;
@@ -50,7 +45,7 @@ class Users extends React.Component<UsersProps> {
       ) {
         getUsers();
       }
-    }, 0);
+    }, 500);
   }
 
   componentDidMount() {
@@ -60,33 +55,9 @@ class Users extends React.Component<UsersProps> {
   }
 
   renderUsersList() {
-    const { users, classes } = this.props;
+    const { users } = this.props;
     return users.map((user: any) => {
-      return (
-        <Link key={user.id} to={`/users/${user.id}`}>
-          <ListItem alignItems="flex-start" className={classes.element}>
-            <ListItemAvatar>
-              <Avatar alt={user.login} src={user.avatar_url} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={user.login}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    color="textPrimary"
-                    className={classes.inline}
-                  >
-                    {user.html_url}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </Link>
-      );
+      return <UserListItem user={user} key={user.login} />;
     });
   }
 
