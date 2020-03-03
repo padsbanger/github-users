@@ -3,11 +3,12 @@ import {
   SEARCH_USERS_SUCCESS,
   SEARCH_USERS_ERROR
 } from "../usersSearch/actions";
+import { User } from "../types/User";
 
 export interface UserSearchReducerState {
   search: string;
   loading: boolean;
-  searchResults: [];
+  searchResults: User[];
 }
 
 export const initialState: UserSearchReducerState = {

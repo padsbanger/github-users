@@ -8,9 +8,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import List from "@material-ui/core/List";
 import UserListItem from "../components/UserListItem";
 import { ListItem } from "@material-ui/core";
+import { User } from "../store/types/User";
 
 interface UsersProps {
-  users: any;
+  users: User[];
   loading: boolean;
   getUsers: () => void;
   error: boolean;
@@ -56,7 +57,7 @@ class Users extends React.Component<UsersProps> {
 
   renderUsersList() {
     const { users } = this.props;
-    return users.map((user: any) => {
+    return users.map((user: User) => {
       return <UserListItem user={user} key={user.login} />;
     });
   }

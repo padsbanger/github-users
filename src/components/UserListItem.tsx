@@ -6,9 +6,10 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+import { User } from "../store/types/User";
 
 interface UserListItemProps {
-  user: any;
+  user: User;
 }
 
 function UserListItem(props: UserListItemProps) {

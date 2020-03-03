@@ -3,10 +3,11 @@ import {
   GET_USERS_LIST_SUCCESS,
   GET_USERS_LIST_ERROR
 } from "./actions";
+import { User } from "../types/User";
 
 export interface UsersListReducerState {
   loading: boolean;
-  users: [];
+  users: User[];
   error: false;
   since: number;
 }

@@ -4,10 +4,11 @@ import {
   GET_SINGLE_USER_ERROR,
   CLEAR_SINGLE_USER
 } from "./actions";
+import { User } from "../types/User";
 
 export interface SingleUserReducerState {
   loading: boolean;
-  user: any;
+  user: User | null;
   error: string | null;
 }
 
